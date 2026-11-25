@@ -8,16 +8,16 @@ window.TIBYAN_SITE_DATA = {
     email: "social.7.space.1@gmail.com",
     facebook: "https://www.facebook.com/profile.php?id=61596381595016",
     releasesApi: "https://api.github.com/repos/indrolocas-wq/tibyan-hub-releases/releases/latest",
-    fallbackDesktopVer: "1.0.37",
+    fallbackDesktopVer: "1.0.38",
     fallbackAndroidVer: "0.10.2",
     fallbackAssets: {
-      winSetupX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.37/TibyanHub-1.0.37-x64-setup.exe",
-      winPortX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.37/TibyanHub-1.0.37-x64-portable.exe",
-      winSetupArm: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.37/TibyanHub-1.0.37-arm64-setup.exe",
-      linuxDebX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.37/TibyanHub-1.0.37-amd64.deb",
-      linuxAppImageX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.37/TibyanHub-1.0.37-x86_64.AppImage",
-      linuxDebArm: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.37/TibyanHub-1.0.37-arm64.deb",
-      androidApk: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.37/TibyanHub-0.10.2.apk"
+      winSetupX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.38/TibyanHub-1.0.38-x64-setup.exe",
+      winPortX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.38/TibyanHub-1.0.38-x64-portable.exe",
+      winSetupArm: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.38/TibyanHub-1.0.38-arm64-setup.exe",
+      linuxDebX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.38/TibyanHub-1.0.38-amd64.deb",
+      linuxAppImageX64: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.38/TibyanHub-1.0.38-x86_64.AppImage",
+      linuxDebArm: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.38/TibyanHub-1.0.38-arm64.deb",
+      androidApk: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/download/v1.0.38/TibyanHub-0.10.2.apk"
     }
   },
 
