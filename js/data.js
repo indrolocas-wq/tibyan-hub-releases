@@ -7,7 +7,6 @@ window.TIBYAN_SITE_DATA = {
   links: {
     email: "social.7.space.1@gmail.com",
     facebook: "https://www.facebook.com/profile.php?id=61596381595016",
-    releasesPage: "https://github.com/indrolocas-wq/tibyan-hub-releases/releases/latest",
     releasesApi: "https://api.github.com/repos/indrolocas-wq/tibyan-hub-releases/releases/latest",
     fallbackDesktopVer: "1.0.37",
     fallbackAndroidVer: "0.10.2",
@@ -449,7 +448,7 @@ window.TIBYAN_SITE_DATA = {
     downloads: {
       kicker: "التحميل الرسمي المباشر",
       title: "ابدأ تجربتك المجانية (48 ساعة) على أجهزتك اليوم",
-      desc: "روابط رسمية محدّثة تلقائياً من مستودع الإصدارات العام لـ «تبيان هب».",
+      desc: "روابط تحميل مباشرة ومحدّثة تلقائياً لأحدث نسخة من «تبيان هب».",
       recommendedBadge: "موصى به لجهازك",
       win: {
         name: "Windows",
@@ -468,11 +467,9 @@ window.TIBYAN_SITE_DATA = {
       android: {
         name: "Android",
         req: "الهواتف والأجهزة اللوحية بنظام Android 11 فما فوق (تحديث ذاتي من داخل التطبيق)",
-        primary: "تحميل تطبيق الهاتف واللوحي (APK)",
-        subAll: "عرض جميع ملفات الإصدار على GitHub"
+        primary: "تحميل تطبيق الهاتف واللوحي (APK)"
       },
-      liveStatusPrefix: "أحدث إصدار منشور:",
-      allReleasesLink: "صفحة جميع الإصدارات والتحقق من الملفات ↗"
+      liveStatusPrefix: "أحدث إصدار منشور:"
     },
     contact: {
       kicker: "تواصل مباشر",
@@ -920,7 +917,7 @@ window.TIBYAN_SITE_DATA = {
     downloads: {
       kicker: "Official Direct Downloads",
       title: "Start Your 48-Hour Free Trial Today",
-      desc: "Verified binaries served directly from the official public Tibyan Hub releases repository.",
+      desc: "Direct, verified installers automatically kept up to date with the latest Tibyan Hub release.",
       recommendedBadge: "Detected for Your Device",
       win: {
         name: "Windows",
@@ -939,11 +936,9 @@ window.TIBYAN_SITE_DATA = {
       android: {
         name: "Android",
         req: "Phones & Tablets running Android 11+ (with built-in in-app updates)",
-        primary: "Download Android APK (Phone & Tablet)",
-        subAll: "View All Release Assets on GitHub"
+        primary: "Download Android APK (Phone & Tablet)"
       },
-      liveStatusPrefix: "Latest published release:",
-      allReleasesLink: "All releases & release notes on GitHub ↗"
+      liveStatusPrefix: "Latest published release:"
     },
     contact: {
       kicker: "Direct Contact",
