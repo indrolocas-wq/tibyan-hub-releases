@@ -661,7 +661,6 @@
     const d = DATA[state.lang].downloads;
     const grid = document.getElementById("download-grid");
     const statusEl = document.getElementById("release-live-status");
-    const allLink = document.getElementById("release-all-link");
     if (!grid) return;
 
     const cards = [
@@ -693,7 +692,7 @@
         req: d.android.req,
         primaryLabel: d.android.primary,
         primaryUrl: state.assets.androidApk,
-        subs: [{ label: d.android.subAll, url: DATA.links.releasesPage }]
+        subs: []
       }
     ];
 
@@ -713,9 +712,7 @@
               <a class="btn ${isRec ? "btn-brass" : "btn-ghost-dark"}" href="${esc(c.primaryUrl)}" id="dl-primary-${c.key}">
                 ${esc(c.primaryLabel)}
               </a>
-              <div class="os-sub-links">
-                ${c.subs.map((s) => `<a href="${esc(s.url)}">${esc(s.label)}</a>`).join("")}
-              </div>
+              ${c.subs.length ? `<div class="os-sub-links">${c.subs.map((s) => `<a href="${esc(s.url)}">${esc(s.label)}</a>`).join("")}</div>` : ""}
             </div>
           </div>`;
       })
@@ -723,10 +720,6 @@
 
     if (statusEl) {
       statusEl.innerHTML = `${esc(d.liveStatusPrefix)} <strong class="mono">${esc(state.releaseTag)}</strong> · <span class="mono">${esc(state.releaseDate)}</span>`;
-    }
-    if (allLink) {
-      allLink.textContent = d.allReleasesLink;
-      allLink.href = DATA.links.releasesPage;
     }
   }
 
