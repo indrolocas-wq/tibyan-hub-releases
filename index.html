@@ -8,9 +8,10 @@
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://indrolocas-wq.github.io/tibyan-hub-releases/" />
   <meta property="og:title" content="تبيان هب (Tibyan Hub) — المنظومة الدراسية للسنة الأولى إعلام آلي" />
-  <meta property="og:description" content="كل ما تحتاجه لسنتك الأولى إعلام آلي (L1 Informatique) مرتّب في مكان واحد — على الحاسوب (Windows · Linux) والهاتف (Android)، ومعكِ نور." />
-  <meta property="og:image" content="assets/og-cover.jpg" />
+  <meta property="og:description" content="كل ما تحتاجه لسنتك الأولى إعلام آلي (L1 Informatique) مرتّب في مكان واحد — على الحاسوب (Windows · Linux) والهاتف (Android)، ومعك نور." />
+  <meta property="og:image" content="https://indrolocas-wq.github.io/tibyan-hub-releases/assets/og-cover.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#14181F" />
 
@@ -29,6 +30,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Tibyan Hub (تبيان هب)",
+    "url": "https://indrolocas-wq.github.io/tibyan-hub-releases/",
     "operatingSystem": "Windows 10/11, Linux, Android 11+",
     "applicationCategory": "EducationalApplication",
     "inLanguage": ["ar", "en"],
@@ -44,7 +46,7 @@
 <body>
 
   <!-- ====================================================================
-       1. Sticky Editorial Navigation Header
+       1. Sticky Editorial Navigation Header + Reading Progress Bar
        ==================================================================== -->
   <header class="site-header" id="site-header">
     <div class="container header-inner">
@@ -58,11 +60,12 @@
 
       <nav class="main-nav" id="main-nav" aria-label="التنقّل الرئيسي">
         <a href="#product" class="nav-link" id="nav-product">المنظومة</a>
-        <a href="#curriculum" class="nav-link" id="nav-curriculum">المقاييس والمنهج</a>
-        <a href="#nour" class="nav-link" id="nav-nour">نور والخصوصية</a>
+        <a href="#playground" class="nav-link" id="nav-playground">جرّب حيّاً</a>
+        <a href="#curriculum" class="nav-link" id="nav-curriculum">المقاييس</a>
         <a href="#audiences" class="nav-link" id="nav-audiences">للأساتذة والمستثمرين</a>
+        <a href="#roadmap" class="nav-link" id="nav-roadmap">خارطة الطريق</a>
         <a href="#pricing" class="nav-link" id="nav-pricing">التسعير والمنح</a>
-        <a href="#faq" class="nav-link" id="nav-faq">الأسئلة الشائعة</a>
+        <a href="#faq" class="nav-link" id="nav-faq">الأسئلة</a>
       </nav>
 
       <div class="header-actions">
@@ -71,6 +74,7 @@
         <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="القائمة" aria-expanded="false">☰</button>
       </div>
     </div>
+    <div class="scroll-progress-bar" id="scroll-progress-bar" aria-hidden="true"></div>
   </header>
 
   <main id="top">
@@ -87,7 +91,7 @@
             </div>
 
             <h1 class="hero-title" id="hero-title">
-              كل ما تحتاجه لسنتك الأولى، مرتّب في مكان واحد — ومعكِ نور.
+              كل ما تحتاجه لسنتك الأولى، مرتّب في مكان واحد — ومعك نور.
             </h1>
 
             <p class="hero-lead" id="hero-lead">
@@ -105,11 +109,7 @@
               </button>
             </div>
 
-            <div class="hero-meta-note" id="hero-checks">
-              <span class="hero-meta-item"><span class="meta-check" aria-hidden="true">✓</span> تجربة مجانية شاملة لمدة 48 ساعة</span>
-              <span class="hero-meta-item"><span class="meta-check" aria-hidden="true">✓</span> يعمل دون إنترنت في ركائزه الأساسية</span>
-              <span class="hero-meta-item"><span class="meta-check" aria-hidden="true">✓</span> واجهة عربية كاملة أو إنجليزية كاملة</span>
-            </div>
+            <div class="hero-meta-note" id="hero-checks"></div>
           </div>
 
           <div class="hero-stage">
@@ -140,24 +140,7 @@
           </div>
         </div>
 
-        <div class="facts-strip" id="facts-strip" aria-label="حقائق موثقة عن المنظومة">
-          <div class="fact-item">
-            <div class="fact-num mono">6 / 7</div>
-            <div class="fact-label">مقاييس جاهزة اليوم في السداسي الأول (ومقياس البرمجيات الحرة قيد الإعداد بشفافية)</div>
-          </div>
-          <div class="fact-item">
-            <div class="fact-num mono">420</div>
-            <div class="fact-label">مصطلحاً جامعياً مشروحاً بثلاث لغات (عربي · إنجليزي · فرنسي) مع أمثلة مُحقَّقة</div>
-          </div>
-          <div class="fact-item">
-            <div class="fact-num mono">+500</div>
-            <div class="fact-label">تمرين محلول ومُختبَر برمجياً (400 تمرين C مُترجَم + 109 تمارين محاكاة امتحان)</div>
-          </div>
-          <div class="fact-item">
-            <div class="fact-num mono">4</div>
-            <div class="fact-label">منصات متكاملة: Windows و Linux وهاتف ولوحي Android بترخيص شخصي واحد</div>
-          </div>
-        </div>
+        <div class="facts-strip" id="facts-strip" aria-label="حقائق موثقة عن المنظومة"></div>
       </div>
     </section>
 
@@ -165,13 +148,11 @@
          3. Interactive 6-Tab Product Theater (Real App Captures)
          ==================================================================== -->
     <section class="section section-cinema" id="product" aria-labelledby="theater-title">
-      <div class="container">
+      <div class="container reveal-block">
         <div class="section-head">
           <span class="section-kicker" id="theater-kicker">جولة حقيقية داخل التطبيق</span>
           <h2 class="section-title" id="theater-title">حلقة تعلّم متكاملة: تعلّم ← تدرّب ← راجِع ← امتحِن نفسك</h2>
-          <p class="section-desc" id="theater-desc">
-            كل شاشة أدناه ملتقطة مباشرة من تطبيق «تبيان هب» الفعلي دون أي تعديل تجميلي. بدّل التبويبات لاستكشاف الأدوات كما يراها الطالب يومياً.
-          </p>
+          <p class="section-desc" id="theater-desc"></p>
         </div>
 
         <div class="theater-tabs" id="theater-tabs" role="tablist" aria-label="أقسام التطبيق"></div>
@@ -180,23 +161,37 @@
     </section>
 
     <!-- ====================================================================
-         4. Nour Socratic Companion & Local Privacy Charter
+         4. NEW: 3-in-1 Interactive Live Browser Playground (Zero Download)
+         ==================================================================== -->
+    <section class="section" id="playground" aria-labelledby="play-title">
+      <div class="container reveal-block">
+        <div class="section-head">
+          <span class="section-kicker" id="play-kicker">تجرِبة تفاعلية مباشرة دون تحميل</span>
+          <h2 class="section-title" id="play-title">جرّب قلب «تبيان هب» الآن من متصفّحك</h2>
+          <p class="section-desc" id="play-desc"></p>
+        </div>
+
+        <div class="lab-mode-bar" id="play-modes" role="tablist" aria-label="أدوات التجربة الحية"></div>
+        <div class="playground-shell" id="play-shell" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. Nour Socratic Companion & Local Privacy Charter
          ==================================================================== -->
     <section class="section section-subtle" id="nour" aria-labelledby="nour-title">
-      <div class="container">
+      <div class="container reveal-block">
         <div class="nour-split">
           <div>
             <span class="section-kicker" id="nour-kicker">ذكاء اصطناعي مسؤول ومستقل</span>
             <h2 class="section-title" id="nour-title">«نور» — مرافقتكِ الدراسية السقراطية التي تقودك إلى الفهم لا إلى النسخ</h2>
-            <p class="section-desc" id="nour-desc">
-              صُمّمت «نور» لتكون مساعدة علمية نبيهة ترافق الطالب داخل سياق الدرس والتمرين، مع احترام تام للنزاهة الأكاديمية ولخصوصية بياناته.
-            </p>
+            <p class="section-desc" id="nour-desc"></p>
             <div class="pillar-list" id="nour-pillars"></div>
           </div>
 
           <aside class="privacy-ledger" aria-labelledby="ledger-title">
             <h3 id="ledger-title">ميثاق الشفافية والخصوصية</h3>
-            <p id="ledger-sub">مصمّم بما ينسجم مع مبادئ حماية المعطيات الشخصية في القانون الجزائري (18-07):</p>
+            <p id="ledger-sub"></p>
             <div class="ledger-table" id="ledger-rows"></div>
           </aside>
         </div>
@@ -204,16 +199,14 @@
     </section>
 
     <!-- ====================================================================
-         5. Honest S1 & S2 Curriculum Matrix
+         6. Honest S1 & S2 Curriculum Matrix
          ==================================================================== -->
     <section class="section" id="curriculum" aria-labelledby="curr-title">
-      <div class="container">
+      <div class="container reveal-block">
         <div class="section-head">
           <span class="section-kicker" id="curr-kicker">شفافية المحتوى الأكاديمي</span>
           <h2 class="section-title" id="curr-title">خريطة المقاييس الرسمية (Canevas L1 Informatique)</h2>
-          <p class="section-desc" id="curr-desc">
-            نعرض بصدق تام ما هو متوفّر وجاهز اليوم داخل الإصدار الحالي (v1.0.37)، وما هو قيد الإعداد للسداسي الأول والسداسي الثاني.
-          </p>
+          <p class="section-desc" id="curr-desc"></p>
         </div>
 
         <div class="sem-Controls" role="tablist" aria-label="اختيار السداسي">
@@ -236,14 +229,34 @@
     </section>
 
     <!-- ====================================================================
-         6. Dedicated Perspectives: Professors, Investors & Students
+         7. NEW: Structural Comparison Matrix
          ==================================================================== -->
-    <section class="section section-subtle" id="audiences" aria-labelledby="stake-title">
-      <div class="container">
+    <section class="section section-subtle" id="comparison" aria-labelledby="comp-title">
+      <div class="container reveal-block">
+        <div class="section-head">
+          <span class="section-kicker" id="comp-kicker">المقارنة المنهجية</span>
+          <h2 class="section-title" id="comp-title">لماذا «تبيان هب» مختلف جذرياً عن البدائل المتاحة؟</h2>
+          <p class="section-desc" id="comp-desc"></p>
+        </div>
+
+        <div class="table-scroll">
+          <table class="curr-table comp-table" id="comp-table">
+            <thead id="comp-thead"></thead>
+            <tbody id="comp-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         8. Dedicated Perspectives: Professors, Investors & Students
+         ==================================================================== -->
+    <section class="section" id="audiences" aria-labelledby="stake-title">
+      <div class="container reveal-block">
         <div class="section-head">
           <span class="section-kicker" id="stake-kicker">رؤية واضحة لكل طرف</span>
           <h2 class="section-title" id="stake-title">بُني ليُقنع الطالب بفائدته، والأستاذ بصرامته، والمستثمر باستدامته</h2>
-          <p class="section-desc" id="stake-desc">إجابات صريحة ومباشرة على ما يهمّ كل فئة دون مبالغة تسويقية.</p>
+          <p class="section-desc" id="stake-desc"></p>
         </div>
 
         <div class="stakeholder-grid" id="stakeholder-grid"></div>
@@ -251,16 +264,29 @@
     </section>
 
     <!-- ====================================================================
-         7. Fair Student Pricing (450 DZD), 48h Trial & Free Study Grants
+         9. NEW: 4-Stage Milestones & Growth Roadmap
+         ==================================================================== -->
+    <section class="section section-subtle" id="roadmap" aria-labelledby="road-title">
+      <div class="container reveal-block">
+        <div class="section-head">
+          <span class="section-kicker" id="road-kicker">المسار التنفيذي وخارطة التوسّع</span>
+          <h2 class="section-title" id="road-title">ما أُنجز فعلياً على أرض الواقع، وما نبنيه للمرحلة القادمة</h2>
+          <p class="section-desc" id="road-desc"></p>
+        </div>
+
+        <div class="roadmap-grid" id="roadmap-grid"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         10. Fair Student Pricing (450 DZD), 48h Trial & Free Study Grants
          ==================================================================== -->
     <section class="section" id="pricing" aria-labelledby="pricing-title">
-      <div class="container">
+      <div class="container reveal-block">
         <div class="section-head">
           <span class="section-kicker" id="pricing-kicker">تسعير عادل ومنح مفتوحة</span>
           <h2 class="section-title" id="pricing-title">بثمن وجبة طاكوس، استثمر في سنتك الجامعية الأولى</h2>
-          <p class="section-desc" id="pricing-desc">
-            صُمّم التسعير ليكون في متناول كل طالب جامعي في الجزائر، مع تجربة مجانية قبل الدفع ونظام منح لمن يحتاج إليه.
-          </p>
+          <p class="section-desc" id="pricing-desc"></p>
         </div>
 
         <div class="pricing-layout">
@@ -271,37 +297,29 @@
                 <span class="price-amount" id="taco-price">450</span>
                 <span class="price-unit" id="taco-currency">د.ج</span>
               </div>
-              <blockquote class="taco-quote" id="taco-quote">
-                «ادعمنا بوجبة طاكوس (450 د.ج) واستفد من كنز معرفي لسنتك الدراسية الأولى»
-              </blockquote>
+              <blockquote class="taco-quote" id="taco-quote"></blockquote>
               <ul class="taco-perks" id="taco-perks"></ul>
             </div>
-            <a href="https://www.facebook.com/profile.php?id=61596381595016" target="_blank" rel="noopener noreferrer" class="btn btn-brass" id="taco-buy-btn">
-              اطلب رمز التفعيل عبر الصفحة الرسمية
-            </a>
+            <a href="https://www.facebook.com/profile.php?id=61596381595016" target="_blank" rel="noopener noreferrer" class="btn btn-brass" id="taco-buy-btn"></a>
           </div>
 
           <div class="side-tiers">
             <div class="tier-box">
-              <h3 id="trial-box-title">تجربة مجانية شاملة لمدة 48 ساعة</h3>
+              <h3 id="trial-box-title"></h3>
               <p id="trial-box-body"></p>
-              <a href="#downloads" class="btn btn-primary btn-sm" id="trial-box-cta">حمّل وجرّب مجاناً</a>
+              <a href="#downloads" class="btn btn-primary btn-sm" id="trial-box-cta"></a>
             </div>
 
             <div class="tier-box">
-              <h3 id="grant-box-title">نظام المنح المجانية للطلبة</h3>
+              <h3 id="grant-box-title"></h3>
               <p id="grant-box-body"></p>
-              <a href="https://www.facebook.com/profile.php?id=61596381595016" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="grant-box-cta">
-                اطلب منحة عبر فيسبوك
-              </a>
+              <a href="https://www.facebook.com/profile.php?id=61596381595016" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="grant-box-cta"></a>
             </div>
 
             <div class="tier-box">
-              <h3 id="custom-box-title">باقات الأساتذة والشراكات والاستثمار</h3>
+              <h3 id="custom-box-title"></h3>
               <p id="custom-box-body"></p>
-              <a href="mailto:social.7.space.1@gmail.com" class="btn btn-secondary btn-sm" id="custom-box-cta">
-                تواصل معنا مباشرة
-              </a>
+              <a href="mailto:social.7.space.1@gmail.com" class="btn btn-secondary btn-sm" id="custom-box-cta"></a>
             </div>
           </div>
         </div>
@@ -309,10 +327,10 @@
     </section>
 
     <!-- ====================================================================
-         8. Audience-Segmented FAQ Accordion
+         11. Audience-Segmented FAQ Accordion
          ==================================================================== -->
     <section class="section section-subtle" id="faq" aria-labelledby="faq-title">
-      <div class="container">
+      <div class="container reveal-block">
         <div class="section-head">
           <span class="section-kicker" id="faq-kicker">إجابات صريحة ومفصّلة</span>
           <h2 class="section-title" id="faq-title">الأسئلة الشائعة للطلبة والأساتذة والمستثمرين</h2>
@@ -324,17 +342,26 @@
     </section>
 
     <!-- ====================================================================
-         9. Live Multi-Platform Download Hub (Auto-Synced with GitHub Releases)
+         12. Live Multi-Platform Download Hub + Auditorium Projector QR
          ==================================================================== -->
     <section class="section section-cinema" id="downloads" aria-labelledby="dl-title">
-      <div class="container">
+      <div class="container reveal-block">
         <div class="section-head">
           <span class="section-kicker" id="dl-kicker">التحميل الرسمي المباشر</span>
           <h2 class="section-title" id="dl-title">ابدأ تجربتك المجانية (48 ساعة) على أجهزتك اليوم</h2>
-          <p class="section-desc" id="dl-desc">روابط رسمية محدّثة تلقائياً من مستودع الإصدارات العام لـ «تبيان هب».</p>
+          <p class="section-desc" id="dl-desc"></p>
         </div>
 
         <div class="download-grid" id="download-grid"></div>
+
+        <div class="projector-qr-bar" id="projector-qr-bar">
+          <div>
+            <h3 style="font-size: 1.12rem; margin-bottom: 6px; color: var(--cinema-ink-100);" id="qr-banner-title"></h3>
+            <p style="font-size: 0.9rem; color: var(--cinema-ink-300); margin-bottom: 6px;" id="qr-banner-sub"></p>
+            <span class="mono" style="font-size: 0.84rem; color: var(--brass-400);">https://indrolocas-wq.github.io/tibyan-hub-releases/</span>
+          </div>
+          <div class="projector-qr-box" id="projector-qr-svg" aria-label="QR Code"></div>
+        </div>
 
         <div class="release-live-bar">
           <span id="release-live-status"></span>
@@ -344,20 +371,20 @@
     </section>
 
     <!-- ====================================================================
-         10. Official Direct Contact Strip
+         13. Official Direct Contact Strip
          ==================================================================== -->
     <section class="contact-strip" id="contact" aria-labelledby="contact-title">
-      <div class="container contact-box">
+      <div class="container contact-box reveal-block">
         <div>
           <span class="section-kicker" id="contact-kicker">تواصل مباشر</span>
-          <h2 class="section-title" id="contact-title">نحن هنا للإجابة عن استفسارات الطلبة والأساتذة والمستثمرين</h2>
+          <h2 class="section-title" id="contact-title"></h2>
           <p class="section-desc" id="contact-desc"></p>
         </div>
 
         <div class="contact-channels">
           <a href="mailto:social.7.space.1@gmail.com" class="channel-card" id="contact-email-link">
             <div>
-              <span class="channel-title" id="contact-email-title">البريد الإلكتروني الرسمي</span>
+              <span class="channel-title" id="contact-email-title"></span>
               <span class="channel-desc" id="contact-email-desc"></span>
             </div>
             <span class="mono" style="font-size: 0.86rem; font-weight: 600;">social.7.space.1@gmail.com</span>
@@ -365,7 +392,7 @@
 
           <a href="https://www.facebook.com/profile.php?id=61596381595016" target="_blank" rel="noopener noreferrer" class="channel-card" id="contact-fb-link">
             <div>
-              <span class="channel-title" id="contact-fb-title">الصفحة الرسمية على فيسبوك</span>
+              <span class="channel-title" id="contact-fb-title"></span>
               <span class="channel-desc" id="contact-fb-desc"></span>
             </div>
             <span class="mono" style="font-size: 0.86rem; font-weight: 600;">Facebook ↗</span>
@@ -386,14 +413,15 @@
   <div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-modal-title" aria-hidden="true">
     <div class="video-modal-dialog">
       <div class="video-modal-top">
-        <span id="video-modal-title">الفيديو التعريفي الرسمي — تبيان هب (60 ثانية)</span>
-        <button type="button" class="modal-close-btn" id="video-modal-close">إغلاق ✕</button>
+        <span id="video-modal-title"></span>
+        <button type="button" class="modal-close-btn" id="video-modal-close"></button>
       </div>
       <video id="promo-video-player" controls playsinline preload="none"></video>
     </div>
   </div>
 
   <script src="js/data.js"></script>
+  <script src="js/extra-data.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
