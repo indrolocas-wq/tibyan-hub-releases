@@ -1501,3 +1501,480 @@ html[lang="en"] .section-kicker {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   11. Reading Progress Bar, Active Nav & Smooth Reveal
+   ========================================================================== */
+.scroll-progress-bar {
+  position: absolute;
+  bottom: -1px;
+  inset-inline-start: 0;
+  height: 2.5px;
+  width: 0%;
+  background: var(--brass-600);
+  transition: width 0.08s linear;
+  z-index: 102;
+}
+
+.nav-link.is-active {
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.reveal-block {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+}
+
+.reveal-block.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   12. Interactive Live Playground (3-in-1 Browser Experience, Zero Download)
+   ========================================================================== */
+.lab-mode-bar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--bg-subtle);
+  padding: 5px;
+  border-radius: 11px;
+  border: 1px solid var(--line-light);
+  margin-bottom: 26px;
+}
+
+.lab-mode-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.91rem;
+  font-weight: 600;
+  color: var(--ink-700);
+  transition: all 0.2s ease;
+}
+
+.lab-mode-btn[aria-selected="true"] {
+  background: var(--ink-900);
+  color: var(--bg-paper);
+  box-shadow: var(--shadow-sm);
+}
+
+.playground-shell {
+  background: var(--bg-paper);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  padding: clamp(22px, 3.5vw, 36px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Mode 1: Trilingual Glossary Explorer */
+.term-explorer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.term-search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-canvas);
+  font: inherit;
+  font-size: 0.94rem;
+  color: var(--ink-900);
+  margin-bottom: 14px;
+}
+
+.term-chips-list {
+  display: grid;
+  gap: 8px;
+}
+
+.term-chip-btn {
+  text-align: start;
+  padding: 11px 15px;
+  border-radius: 9px;
+  border: 1px solid var(--line-light);
+  background: var(--bg-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.term-chip-btn:hover {
+  background: var(--bg-subtle);
+}
+
+.term-chip-btn.active {
+  background: var(--brass-tint);
+  border-color: hsla(39, 84%, 29%, 0.35);
+}
+
+.term-chip-ar {
+  font-weight: 700;
+  color: var(--ink-900);
+  font-size: 0.94rem;
+}
+
+.term-chip-lat {
+  font-size: 0.8rem;
+  color: var(--ink-500);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.term-detail-card {
+  background: var(--bg-canvas);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  padding: 26px 28px;
+}
+
+.term-subj-tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: var(--sage-tint);
+  color: var(--sage-700);
+  margin-bottom: 12px;
+}
+
+.term-tri-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 18px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.term-tri-ar {
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.term-tri-en,
+.term-tri-fr {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--ink-700);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.term-def-text {
+  font-size: 0.98rem;
+  color: var(--ink-700);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.term-example-box {
+  background: var(--ink-900);
+  color: var(--cinema-ink-100);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  direction: ltr;
+  text-align: left;
+  overflow-x: auto;
+}
+
+/* Mode 2: Live Offline Bug Diagnosis */
+.bug-picker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.bug-pill {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-canvas);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.bug-pill.active {
+  background: var(--brass-tint);
+  color: var(--brass-700);
+  border-color: hsla(39, 84%, 29%, 0.4);
+}
+
+.bug-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.code-editor-pane {
+  background: #12161F;
+  color: #E7ECF5;
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.87rem;
+  line-height: 1.72;
+  direction: ltr;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.code-line {
+  display: flex;
+  gap: 14px;
+  padding-inline: 8px;
+  border-radius: 4px;
+}
+
+.code-line.is-bug {
+  background: hsla(4, 78%, 56%, 0.22);
+  border-left: 3px solid hsl(4, 82%, 62%);
+}
+
+.code-ln {
+  color: #697386;
+  user-select: none;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.evidence-pane {
+  display: grid;
+  gap: 14px;
+}
+
+.evidence-card {
+  background: var(--bg-canvas);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+}
+
+.evidence-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--amber-700);
+  background: var(--amber-tint);
+  padding: 3px 9px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.nour-socratic-box {
+  background: var(--sage-tint);
+  border: 1px solid hsla(157, 58%, 24%, 0.22);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  color: var(--ink-900);
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.nour-socratic-label {
+  font-weight: 700;
+  color: var(--sage-700);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Mode 3: Adaptive Placement Sample */
+.quiz-box {
+  max-width: 760px;
+}
+
+.quiz-q-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.quiz-opt-btn {
+  text-align: start;
+  padding: 13px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-canvas);
+  font-size: 0.94rem;
+  font-weight: 500;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.quiz-opt-btn:hover {
+  background: var(--bg-subtle);
+}
+
+.quiz-opt-btn.selected-correct {
+  background: var(--sage-tint);
+  border-color: var(--sage-700);
+  color: var(--sage-700);
+  font-weight: 700;
+}
+
+.quiz-opt-btn.selected-wrong {
+  background: var(--amber-tint);
+  border-color: var(--amber-700);
+  color: var(--amber-700);
+  font-weight: 600;
+}
+
+.quiz-opt-btn.selected-unsure {
+  background: var(--brass-tint);
+  border-color: var(--brass-700);
+  color: var(--brass-700);
+  font-weight: 600;
+}
+
+.quiz-feedback {
+  padding: 15px 18px;
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  font-size: 0.93rem;
+  color: var(--ink-900);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   13. Comparative Matrix & 4-Stage Roadmap Timeline
+   ========================================================================== */
+.comp-table th:last-child,
+.comp-table td:last-child {
+  background: hsla(42, 65%, 92%, 0.45);
+  font-weight: 600;
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.roadmap-step {
+  background: var(--bg-paper);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: relative;
+}
+
+.roadmap-phase {
+  font-size: 0.77rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.roadmap-step h3 {
+  font-size: 1.08rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.roadmap-step p {
+  font-size: 0.9rem;
+  color: var(--ink-700);
+  line-height: 1.68;
+}
+
+/* Projector-Scannable QR Banner inside Downloads */
+.projector-qr-bar {
+  margin-top: 28px;
+  background: var(--bg-cinema-elev);
+  border: 1px solid var(--line-dark-strong);
+  border-radius: var(--radius-lg);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.projector-qr-box {
+  background: #FFFFFF;
+  padding: 10px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  width: 116px;
+  height: 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .term-explorer-grid,
+  .bug-workbench {
+    grid-template-columns: 1fr;
+  }
+  .roadmap-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+  .projector-qr-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media print {
+  .site-header,
+  .video-modal,
+  #hero-video-cta,
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  body::before {
+    display: none;
+  }
+  .section,
+  .hero-section {
+    padding-block: 24px !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .reveal-block {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+

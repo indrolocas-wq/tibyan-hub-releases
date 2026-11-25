@@ -1,18 +1,24 @@
 /* ==========================================================================
-   Tibyan Hub — Official Public Showcase Application Logic
-   Bilingual RTL/LTR Engine, Interactive Product Theater, Curriculum Matrix,
-   Audience-Filtered FAQ, Promo Video Lightbox, and Live Releases Hydrator
+   Tibyan Hub — Official Public Showcase Application Logic (v2 Complete)
+   Bilingual RTL/LTR Engine, 6-Tab Product Theater, 3-in-1 Live Playground,
+   Curriculum & Comparison Matrices, 4-Stage Roadmap, Projector QR, & Releases
    ========================================================================== */
 
 (function () {
   "use strict";
 
   const DATA = window.TIBYAN_SITE_DATA;
-  if (!DATA) return;
+  const EXTRA = window.TIBYAN_EXTRA_DATA;
+  if (!DATA || !EXTRA) return;
 
   const state = {
     lang: detectInitialLang(),
     activeTab: "study",
+    playMode: "terms",
+    termIndex: 0,
+    termQuery: "",
+    bugIndex: 0,
+    quizSelected: null,
     activeSem: "s1",
     faqFilter: "all",
     detectedOs: detectVisitorOs(),
@@ -46,13 +52,39 @@
     return d.innerHTML;
   }
 
+  function normSearch(s) {
+    return String(s || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f\u064B-\u065F\u0670]/g, "")
+      .replace(/[أإآ]/g, "ا")
+      .trim();
+  }
+
   function setText(id, val) {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
   }
 
+  function renderProjectorQr() {
+    const box = document.getElementById("projector-qr-svg");
+    if (!box || !EXTRA.qrMatrix) return;
+    const mat = EXTRA.qrMatrix;
+    const n = mat.length;
+    let rects = "";
+    for (let y = 0; y < n; y++) {
+      for (let x = 0; x < n; x++) {
+        if (mat[y][x]) {
+          rects += `<rect x="${x}" y="${y}" width="1.03" height="1.03" fill="#111419"/>`;
+        }
+      }
+    }
+    box.innerHTML = `<svg viewBox="0 0 ${n} ${n}" width="96" height="96" shape-rendering="crispEdges" role="img" aria-label="QR Code">${rects}</svg>`;
+  }
+
   function renderAll() {
     const t = DATA[state.lang];
+    const ex = EXTRA[state.lang];
     const html = document.documentElement;
     html.lang = state.lang;
     html.dir = state.lang === "ar" ? "rtl" : "ltr";
@@ -65,9 +97,10 @@
     setText("brand-title", t.brandTitle);
     setText("brand-sub", t.brandSub);
     setText("nav-product", t.nav.product);
+    setText("nav-playground", ex.navPlayground);
     setText("nav-curriculum", t.nav.curriculum);
-    setText("nav-nour", t.nav.nour);
     setText("nav-audiences", t.nav.audiences);
+    setText("nav-roadmap", ex.navRoadmap);
     setText("nav-pricing", t.nav.pricing);
     setText("nav-faq", t.nav.faq);
     setText("header-download-cta", t.nav.downloadCta);
@@ -119,6 +152,12 @@
     setText("theater-desc", t.theater.desc);
     renderTheater();
 
+    // Live Playground
+    setText("play-kicker", ex.playground.kicker);
+    setText("play-title", ex.playground.title);
+    setText("play-desc", ex.playground.desc);
+    renderPlayground();
+
     // Nour & Privacy
     setText("nour-kicker", t.nour.kicker);
     setText("nour-title", t.nour.title);
@@ -159,6 +198,12 @@
     setText("curr-honesty-note", t.curriculum.honestyNote);
     renderCurriculum();
 
+    // Comparison Matrix
+    setText("comp-kicker", ex.comparison.kicker);
+    setText("comp-title", ex.comparison.title);
+    setText("comp-desc", ex.comparison.desc);
+    renderComparison();
+
     // Stakeholders
     setText("stake-kicker", t.stakeholders.kicker);
     setText("stake-title", t.stakeholders.title);
@@ -182,6 +227,25 @@
               </div>
               <a class="btn btn-secondary" href="${esc(href)}">${esc(c.ctaLabel)}</a>
             </article>`;
+        })
+        .join("");
+    }
+
+    // Roadmap
+    setText("road-kicker", ex.roadmap.kicker);
+    setText("road-title", ex.roadmap.title);
+    setText("road-desc", ex.roadmap.desc);
+    const roadGrid = document.getElementById("roadmap-grid");
+    if (roadGrid) {
+      roadGrid.innerHTML = ex.roadmap.steps
+        .map((s) => {
+          const cls = s.tone === "ready" ? "status-ready" : s.tone === "partial" ? "status-partial" : "status-prep";
+          return `
+            <div class="roadmap-step">
+              <span class="roadmap-phase ${cls}">${esc(s.phase)}</span>
+              <h3>${esc(s.title)}</h3>
+              <p>${esc(s.body)}</p>
+            </div>`;
         })
         .join("");
     }
@@ -233,11 +297,14 @@
     setText("faq-title", t.faq.title);
     renderFaq();
 
-    // Downloads
+    // Downloads & QR Banner
     setText("dl-kicker", t.downloads.kicker);
     setText("dl-title", t.downloads.title);
     setText("dl-desc", t.downloads.desc);
+    setText("qr-banner-title", ex.qrBanner.title);
+    setText("qr-banner-sub", ex.qrBanner.sub);
     renderDownloads();
+    renderProjectorQr();
 
     // Contact & Footer
     setText("contact-kicker", t.contact.kicker);
@@ -320,6 +387,180 @@
     });
   }
 
+  function renderPlayground() {
+    const p = EXTRA[state.lang].playground;
+    const modesEl = document.getElementById("play-modes");
+    const shell = document.getElementById("play-shell");
+    if (!modesEl || !shell) return;
+
+    modesEl.innerHTML = p.modes
+      .map(
+        (m) => `
+        <button
+          type="button"
+          role="tab"
+          id="play-mode-${esc(m.id)}"
+          class="lab-mode-btn"
+          aria-selected="${m.id === state.playMode ? "true" : "false"}"
+          data-mode="${esc(m.id)}"
+        >${esc(m.label)}</button>`
+      )
+      .join("");
+
+    modesEl.querySelectorAll(".lab-mode-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.playMode = btn.getAttribute("data-mode");
+        renderPlayground();
+      });
+    });
+
+    if (state.playMode === "terms") {
+      const q = normSearch(state.termQuery);
+      const filtered = p.terms
+        .map((item, idx) => ({ item, idx }))
+        .filter(({ item }) => {
+          if (!q) return true;
+          const hay = normSearch(`${item.ar} ${item.en} ${item.fr} ${item.def}`);
+          return hay.includes(q);
+        });
+      const activeIdx = filtered.some((x) => x.idx === state.termIndex)
+        ? state.termIndex
+        : filtered.length
+        ? filtered[0].idx
+        : 0;
+      const cur = p.terms[activeIdx] || p.terms[0];
+
+      shell.innerHTML = `
+        <div class="term-explorer-grid">
+          <div>
+            <input
+              type="search"
+              class="term-search-input"
+              id="live-term-search"
+              placeholder="${esc(p.searchPlaceholder)}"
+              value="${esc(state.termQuery)}"
+            />
+            <div class="term-chips-list" id="live-term-list">
+              ${filtered
+                .map(
+                  ({ item, idx }) => `
+                  <button type="button" class="term-chip-btn ${idx === activeIdx ? "active" : ""}" data-tidx="${idx}">
+                    <span class="term-chip-ar">${esc(item.ar)}</span>
+                    <span class="term-chip-lat">${esc(item.en)} · ${esc(item.fr)}</span>
+                  </button>`
+                )
+                .join("")}
+            </div>
+          </div>
+          <div class="term-detail-card">
+            <span class="term-subj-tag">${esc(cur.subj)}</span>
+            <div class="term-tri-head">
+              <span class="term-tri-ar">${esc(cur.ar)}</span>
+              <span class="term-tri-en">EN: ${esc(cur.en)}</span>
+              <span class="term-tri-fr">FR: ${esc(cur.fr)}</span>
+            </div>
+            <p class="term-def-text">${esc(cur.def)}</p>
+            <div class="term-example-box">${esc(cur.ex)}</div>
+          </div>
+        </div>`;
+
+      const inp = document.getElementById("live-term-search");
+      if (inp) {
+        inp.addEventListener("input", (e) => {
+          state.termQuery = e.target.value;
+          const pos = e.target.selectionStart;
+          renderPlayground();
+          const nextInp = document.getElementById("live-term-search");
+          if (nextInp) {
+            nextInp.focus();
+            try { nextInp.setSelectionRange(pos, pos); } catch (_) {}
+          }
+        });
+      }
+      shell.querySelectorAll(".term-chip-btn").forEach((b) => {
+        b.addEventListener("click", () => {
+          state.termIndex = Number(b.getAttribute("data-tidx")) || 0;
+          renderPlayground();
+        });
+      });
+    } else if (state.playMode === "bugs") {
+      const bug = p.bugs[state.bugIndex] || p.bugs[0];
+      shell.innerHTML = `
+        <div class="bug-picker-row">
+          ${p.bugs
+            .map(
+              (b, idx) => `
+              <button type="button" class="bug-pill ${idx === state.bugIndex ? "active" : ""}" data-bidx="${idx}">
+                ${esc(b.title)}
+              </button>`
+            )
+            .join("")}
+        </div>
+        <div class="bug-workbench">
+          <div class="code-editor-pane" aria-label="Code Sample">
+            ${bug.lines
+              .map(
+                (ln, idx) => `
+                <div class="code-line ${idx + 1 === bug.bugLine ? "is-bug" : ""}">
+                  <span class="code-ln">${idx + 1}</span>
+                  <span>${esc(ln)}</span>
+                </div>`
+              )
+              .join("")}
+          </div>
+          <div class="evidence-pane">
+            <div class="evidence-card">
+              <span class="evidence-tag">${esc(bug.badge)}</span>
+              <h3 style="font-size: 1.04rem; margin-bottom: 6px;">${esc(bug.ruleTitle)}</h3>
+              <p style="font-size: 0.92rem; color: var(--ink-700); line-height: 1.7;">${esc(bug.ruleBody)}</p>
+            </div>
+            <div class="nour-socratic-box">
+              <span class="nour-socratic-label">✦ ${esc(bug.nourLabel)}</span>
+              <p>${esc(bug.nourPrompt)}</p>
+            </div>
+          </div>
+        </div>`;
+
+      shell.querySelectorAll(".bug-pill").forEach((b) => {
+        b.addEventListener("click", () => {
+          state.bugIndex = Number(b.getAttribute("data-bidx")) || 0;
+          renderPlayground();
+        });
+      });
+    } else {
+      const qz = p.quiz;
+      const chosen = qz.options.find((o) => o.id === state.quizSelected) || null;
+      shell.innerHTML = `
+        <div class="quiz-box">
+          <h3 class="quiz-q-title">${esc(qz.question)}</h3>
+          <div class="quiz-options">
+            ${qz.options
+              .map((opt) => {
+                let cls = "";
+                if (state.quizSelected === opt.id) {
+                  cls =
+                    opt.kind === "correct"
+                      ? "selected-correct"
+                      : opt.kind === "unsure"
+                      ? "selected-unsure"
+                      : "selected-wrong";
+                }
+                return `<button type="button" class="quiz-opt-btn ${cls}" data-qid="${esc(opt.id)}">${esc(opt.text)}</button>`;
+              })
+              .join("")}
+          </div>
+          ${chosen ? `<div class="quiz-feedback" role="status">${esc(chosen.feedback)}</div>` : ""}
+        </div>`;
+
+      shell.querySelectorAll(".quiz-opt-btn").forEach((b) => {
+        b.addEventListener("click", () => {
+          state.quizSelected = b.getAttribute("data-qid");
+          renderPlayground();
+        });
+      });
+    }
+  }
+
   function renderCurriculum() {
     const c = DATA[state.lang].curriculum;
     const btnS1 = document.getElementById("sem-btn-s1");
@@ -349,6 +590,26 @@
             <td><span class="status-tag ${cls}">${dot} ${esc(r.status)}</span></td>
           </tr>`;
       })
+      .join("");
+  }
+
+  function renderComparison() {
+    const comp = EXTRA[state.lang].comparison;
+    const thead = document.getElementById("comp-thead");
+    const tbody = document.getElementById("comp-tbody");
+    if (!thead || !tbody) return;
+
+    thead.innerHTML = `<tr>${comp.cols.map((col) => `<th scope="col">${esc(col)}</th>`).join("")}</tr>`;
+    tbody.innerHTML = comp.rows
+      .map(
+        (r) => `
+        <tr>
+          <td><strong>${esc(r[0])}</strong></td>
+          <td>${esc(r[1])}</td>
+          <td>${esc(r[2])}</td>
+          <td>✓ ${esc(r[3])}</td>
+        </tr>`
+      )
       .join("");
   }
 
@@ -492,8 +753,57 @@
       state.assets.androidApk = findUrl(/\.apk$/i) || state.assets.androidApk;
 
       renderDownloads();
-    } catch (_) {
-      // Fallback URLs remain active offline or under API rate-limits
+    } catch (_) {}
+  }
+
+  function initScrollAndReveal() {
+    const header = document.getElementById("site-header");
+    const prog = document.getElementById("scroll-progress-bar");
+
+    function onScroll() {
+      const y = window.scrollY;
+      if (header) header.classList.toggle("scrolled", y > 12);
+      if (prog) {
+        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        prog.style.width = `${Math.min(100, Math.max(0, (y / max) * 100)).toFixed(1)}%`;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    if ("IntersectionObserver" in window) {
+      const revObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              revObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll(".reveal-block").forEach((el) => revObs.observe(el));
+
+      const navLinks = Array.from(document.querySelectorAll(".main-nav .nav-link"));
+      const secObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && e.target.id) {
+              navLinks.forEach((lnk) => {
+                lnk.classList.toggle("is-active", lnk.getAttribute("href") === `#${e.target.id}`);
+              });
+            }
+          });
+        },
+        { rootMargin: "-35% 0px -55% 0px" }
+      );
+      ["product", "playground", "curriculum", "audiences", "roadmap", "pricing", "faq"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) secObs.observe(el);
+      });
+    } else {
+      document.querySelectorAll(".reveal-block").forEach((el) => el.classList.add("is-visible"));
     }
   }
 
@@ -527,7 +837,6 @@
       });
     }
 
-    // Mobile Navigation Menu
     const menuBtn = document.getElementById("mobile-menu-btn");
     const mainNav = document.getElementById("main-nav");
     if (menuBtn && mainNav) {
@@ -543,17 +852,6 @@
       });
     }
 
-    // Sticky Header Shadow on Scroll
-    const header = document.getElementById("site-header");
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (header) header.classList.toggle("scrolled", window.scrollY > 12);
-      },
-      { passive: true }
-    );
-
-    // Promo Video Lightbox Modal
     const openVideoBtn = document.getElementById("hero-video-cta");
     const modal = document.getElementById("video-modal");
     const closeBtn = document.getElementById("video-modal-close");
@@ -594,6 +892,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     initEvents();
     renderAll();
+    initScrollAndReveal();
     hydrateLatestRelease();
   });
 })();
