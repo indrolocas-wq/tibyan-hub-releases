@@ -22,6 +22,8 @@
     activeSem: "s1",
     faqFilter: "all",
     detectedOs: detectVisitorOs(),
+    isMobileVisitor: /(android|iphone|ipad|ipod|mobile)/i.test(navigator.userAgent || ""),
+    copiedLink: false,
     releaseTag: "v" + DATA.links.fallbackDesktopVer,
     releaseDate: "2026-11-22",
     assets: Object.assign({}, DATA.links.fallbackAssets)
@@ -40,9 +42,7 @@
 
   function detectVisitorOs() {
     const ua = (navigator.userAgent || "").toLowerCase();
-    if (ua.includes("android")) return "android";
     if (ua.includes("linux") && !ua.includes("android")) return "linux";
-    if (ua.includes("win")) return "win";
     return "win";
   }
 
@@ -122,7 +122,11 @@
     }
     if (heroPhoneImg) {
       heroPhoneImg.src = `assets/screens/${state.lang}/phone-today.webp`;
-      heroPhoneImg.alt = state.lang === "ar" ? "تطبيق تبيان هب على أندرويد" : "Tibyan Hub Android Companion";
+      heroPhoneImg.alt = state.lang === "ar" ? "رفيق الهاتف المكمّل على أندرويد" : "Tibyan Hub Android Companion";
+    }
+    if (ex.deviceModel) {
+      setText("hero-pc-role-badge", ex.deviceModel.heroPcBadge);
+      setText("hero-phone-role-badge", ex.deviceModel.heroPhoneBadge);
     }
 
     const checksWrap = document.getElementById("hero-checks");
@@ -131,6 +135,8 @@
         .map((c) => `<span class="hero-meta-item"><span class="meta-check" aria-hidden="true">✓</span> ${esc(c)}</span>`)
         .join("");
     }
+
+    renderDeviceModel();
 
     // Verified Facts Strip
     const factsWrap = document.getElementById("facts-strip");
@@ -657,15 +663,104 @@
       .join("");
   }
 
+  function renderDeviceModel() {
+    const wrap = document.getElementById("device-model-banner");
+    const dm = EXTRA[state.lang] && EXTRA[state.lang].deviceModel;
+    if (!wrap || !dm) return;
+
+    const pcSvg = `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/><path d="M9 16v4"/><path d="M15 16v4"/></svg>`;
+    const phoneSvg = `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>`;
+    const qrBridgeSvg = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20 14v3"/><path d="M14 20h7"/></svg>`;
+
+    wrap.innerHTML = `
+      <div class="device-arch-head">
+        <span class="device-arch-kicker">${esc(dm.kicker)}</span>
+      </div>
+      <div class="device-arch-grid">
+        <article class="device-arch-card is-pc-core">
+          <div class="device-arch-top">
+            <span class="device-icon-box is-pc">${pcSvg}</span>
+            <span class="device-step-badge is-pc">${esc(dm.pcStep)}</span>
+          </div>
+          <h2 class="device-arch-title">${esc(dm.pcTitle)}</h2>
+          <p class="device-arch-body">${esc(dm.pcBody)}</p>
+          <div class="device-tag-list">
+            ${dm.pcTags.map((tg) => `<span class="device-tag is-pc">✓ ${esc(tg)}</span>`).join("")}
+          </div>
+        </article>
+
+        <div class="device-arch-bridge" aria-hidden="true">
+          <div class="bridge-line"></div>
+          <div class="bridge-pill">
+            ${qrBridgeSvg}
+            <span>${esc(dm.bridgeLabel)}</span>
+          </div>
+          <div class="bridge-line"></div>
+        </div>
+
+        <article class="device-arch-card is-phone-comp">
+          <div class="device-arch-top">
+            <span class="device-icon-box is-phone">${phoneSvg}</span>
+            <span class="device-step-badge is-phone">${esc(dm.phoneStep)}</span>
+          </div>
+          <h2 class="device-arch-title">${esc(dm.phoneTitle)}</h2>
+          <p class="device-arch-body">${esc(dm.phoneBody)}</p>
+          <div class="device-tag-list">
+            ${dm.phoneTags.map((tg) => `<span class="device-tag is-phone">+ ${esc(tg)}</span>`).join("")}
+          </div>
+        </article>
+      </div>
+    `;
+  }
+
   function renderDownloads() {
     const d = DATA[state.lang].downloads;
+    const dm = EXTRA[state.lang] && EXTRA[state.lang].deviceModel;
+    const noteEl = document.getElementById("dl-architecture-note");
     const grid = document.getElementById("download-grid");
     const statusEl = document.getElementById("release-live-status");
     if (!grid) return;
 
+    if (noteEl && dm) {
+      noteEl.innerHTML = `
+        <div class="dl-step-banner ${state.isMobileVisitor ? "is-mobile-visitor" : ""}">
+          <div class="dl-step-copy">
+            <div class="dl-step-title">
+              <span class="dl-step-dot" aria-hidden="true"></span>
+              <strong>${esc(state.isMobileVisitor ? dm.mobileNoticeTitle : dm.dlGuideTitle)}</strong>
+            </div>
+            <p class="dl-step-body">${esc(state.isMobileVisitor ? dm.mobileNoticeBody : dm.dlGuideBody)}</p>
+          </div>
+          <button type="button" class="btn ${state.copiedLink ? "btn-copied" : "btn-brass"} btn-sm dl-copy-btn" id="copy-pc-link-btn">
+            ${esc(state.copiedLink ? dm.copiedBtn : dm.copyBtn)}
+          </button>
+        </div>
+      `;
+      const copyBtn = document.getElementById("copy-pc-link-btn");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+          const url = EXTRA.siteUrl || window.location.href;
+          try {
+            await navigator.clipboard.writeText(url);
+          } catch (_) {
+            const ta = document.createElement("textarea");
+            ta.value = url;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch (__) {}
+            document.body.removeChild(ta);
+          }
+          state.copiedLink = true;
+          renderDownloads();
+        });
+      }
+    }
+
     const cards = [
       {
         key: "win",
+        role: "core",
+        stepBadge: d.stepCoreBadge,
         name: d.win.name,
         req: d.win.req,
         primaryLabel: d.win.primary,
@@ -677,6 +772,8 @@
       },
       {
         key: "linux",
+        role: "core",
+        stepBadge: d.stepCoreBadge,
         name: d.linux.name,
         req: d.linux.req,
         primaryLabel: d.linux.primary,
@@ -688,6 +785,8 @@
       },
       {
         key: "android",
+        role: "companion",
+        stepBadge: d.stepCompanionBadge,
         name: d.android.name,
         req: d.android.req,
         primaryLabel: d.android.primary,
@@ -698,13 +797,17 @@
 
     grid.innerHTML = cards
       .map((c) => {
-        const isRec = c.key === state.detectedOs;
+        const isCompanion = c.role === "companion";
+        const isRec = !isCompanion && c.key === state.detectedOs;
         return `
-          <div class="os-card ${isRec ? "detected-os" : ""}" id="os-card-${c.key}">
+          <div class="os-card ${isRec ? "detected-os" : ""} ${isCompanion ? "companion-os" : "core-os"}" id="os-card-${c.key}">
             <div class="os-top">
+              <div class="os-step-row">
+                <span class="os-step-pill ${isCompanion ? "is-companion" : "is-core"}">${esc(c.stepBadge || "")}</span>
+                ${isRec ? `<span class="os-rec-tag">${esc(d.recommendedBadge)}</span>` : ""}
+              </div>
               <div class="os-badge-row">
                 <span class="os-name mono">${esc(c.name)}</span>
-                ${isRec ? `<span class="os-rec-tag">${esc(d.recommendedBadge)}</span>` : ""}
               </div>
               <p class="os-req">${esc(c.req)}</p>
             </div>

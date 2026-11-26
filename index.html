@@ -116,6 +116,7 @@
             <div class="desktop-window">
               <div class="window-bar">
                 <span class="mono" id="hero-window-caption">Tibyan Hub — غرفة الدراسة التفاعلية</span>
+                <span class="hero-role-badge hero-role-pc" id="hero-pc-role-badge">الحاسوب إجباري · الأساس</span>
                 <span class="window-controls" aria-hidden="true">─  □  ×</span>
               </div>
               <img
@@ -129,6 +130,7 @@
             </div>
 
             <div class="phone-float">
+              <span class="hero-role-badge hero-role-phone" id="hero-phone-role-badge">رفيق مكمّل فقط</span>
               <img
                 id="hero-phone-img"
                 src="assets/screens/ar/phone-today.webp"
@@ -139,6 +141,9 @@
             </div>
           </div>
         </div>
+
+        <!-- Sculptural Two-Screen Role Architecture: PC Mandatory + Phone Companion -->
+        <div class="device-arch-wrap" id="device-model-banner" aria-label="قاعدة الأجهزة: الحاسوب أساسي والهاتف مكمّل"></div>
 
         <div class="facts-strip" id="facts-strip" aria-label="حقائق موثقة عن المنظومة"></div>
       </div>
@@ -348,9 +353,11 @@
       <div class="container reveal-block">
         <div class="section-head">
           <span class="section-kicker" id="dl-kicker">التحميل الرسمي المباشر</span>
-          <h2 class="section-title" id="dl-title">ابدأ تجربتك المجانية (48 ساعة) على أجهزتك اليوم</h2>
+          <h2 class="section-title" id="dl-title">ابدأ تجربتك المجانية (48 ساعة) من حاسوبك أولاً</h2>
           <p class="section-desc" id="dl-desc"></p>
         </div>
+
+        <div id="dl-architecture-note"></div>
 
         <div class="download-grid" id="download-grid"></div>
 
