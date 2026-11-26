@@ -180,9 +180,29 @@ window.TIBYAN_EXTRA_DATA = {
         }
       ]
     },
+    deviceModel: {
+      heroPcBadge: "الحاسوب إجباري · الأساس",
+      heroPhoneBadge: "رفيق مكمّل فقط",
+      kicker: "فلسفة «دراسة واحدة، شاشتان»",
+      pcStep: "1 · المحطة الأساسية (إجباري)",
+      pcTitle: "الحاسوب هو أساس التجربة — Windows أو Linux",
+      pcBody: "الإعلام الآلي لا يُتقَن من شاشة صغيرة؛ على الحاسوب تقرأ الكتب والكتيّبات، تشاهد الدروس، تبرمج بـ C والخوارزميات دون إنترنت، تكتب البراهين، وتستعين بـ«نور». تبدأ التجربة المجانية والتفعيل من الحاسوب دائماً.",
+      pcTags: ["غرفة الدراسة والكتب", "مترجم C والخوارزميات", "المذكرة ومحاكي الامتحان", "مرافقة «نور»"],
+      bridgeLabel: "ربط بمسح QR واحد",
+      phoneStep: "2 · رفيق الجيب (اختياري ومكمّل)",
+      phoneTitle: "الهاتف واللوحي مكمّل للتجربة فقط — Android",
+      phoneBody: "لا يعمل تطبيق الهاتف منفرداً ولا يغني عن الحاسوب؛ بل يرتبط بحاسوبك المفعَّل بمسح رمز QR ليرافقك خارج البيت في مراجعة البطاقات وإرسال صور حلولك الورقية إلى حاسوبك بلمسة واحدة.",
+      phoneTags: ["بطاقات الحفظ في المواصلات", "كاميرا لاسلكية للورقة والجدول", "مزامنة التقدّم وموضع التوقّف"],
+      dlGuideTitle: "قاعدة التثبيت في خطوتين: الحاسوب أولاً (إجباري)، ثم الهاتف كرفيق مكمّل",
+      dlGuideBody: "ثبّت النسخة الأساسية على حاسوبك (Windows أو Linux) وفعّل تجربتك المجانية عليها أولاً، ثم افتح قسم «أجهزتي» داخل الحاسوب لتربط هاتفك الأندرويد بمسح رمز QR واحد.",
+      mobileNoticeTitle: "تتصفّح الموقع من هاتفك الآن؟ ستحتاج إلى فتحه على حاسوبك لبدء التجربة",
+      mobileNoticeBody: "بما أن الحاسوب إجباري لتشغيل «تبيان هب» والهاتف رفيق مكمّل له فقط، انسخ رابط الموقع بضغطة واحدة وافتحه على حاسوبك (Windows أو Linux) للبدء:",
+      copyBtn: "انسخ رابط الموقع لحاسوبي",
+      copiedBtn: "✓ تمّ نسخ الرابط! افتحه على حاسوبك"
+    },
     qrBanner: {
-      title: "هل تتابع العرض من القاعة؟ امسح الرمز لفتح الموقع والتحميل على هاتفك",
-      sub: "يفتح هذا الرمز الموقع الرسمي المباشر لتصفّح المقاييس وتحميل نسخة الهاتف (Android) أو الحاسوب."
+      title: "هل تتابع العرض من القاعة؟ امسح الرمز لحفظ رابط الموقع الرسمي",
+      sub: "تصفّح المقاييس والمختبر التفاعلي من هاتفك الآن، ثم افتح الرابط نفسه على حاسوبك (Windows أو Linux) لتثبيت النسخة الأساسية وربط هاتفك بها."
     }
   },
 
@@ -359,9 +379,29 @@ window.TIBYAN_EXTRA_DATA = {
         }
       ]
     },
+    deviceModel: {
+      heroPcBadge: "PC Required · Core",
+      heroPhoneBadge: "Companion Only",
+      kicker: "«One Study Flow, Two Screens» Architecture",
+      pcStep: "1 · Mandatory Core Workspace",
+      pcTitle: "A Computer Is Required — Windows or Linux",
+      pcBody: "Computer Science cannot be mastered on a tiny screen alone. On your PC you read the books, watch lessons, compile C & trace algorithms offline, write math proofs, sit mock exams, and study with Nour. Your trial and activation always start on PC.",
+      pcTags: ["Split Study Room & Books", "Offline C & Algo Compiler", "Maths Proofs & Exam Sim", "Nour AI Coach"],
+      bridgeLabel: "One-Scan QR Pair",
+      phoneStep: "2 · Optional Pocket Companion",
+      phoneTitle: "Phone & Tablet Complement Your PC Only — Android",
+      phoneBody: "The Android app never runs standalone and does not replace the desktop app; it pairs with your activated PC in a single QR scan for Leitner flashcard reviews on the go and snapping handwritten sheets straight to your PC.",
+      phoneTags: ["Flashcards on the Bus", "Wireless Paper & Timetable Camera", "Seamless Resume & Streak Sync"],
+      dlGuideTitle: "Two-Step Setup: Install on Your PC First (Required), Then Pair Your Phone",
+      dlGuideBody: "Install and start your 48-hour trial on a Windows or Linux computer first, then open «My Devices» on your PC to link your Android phone as a companion in one QR scan.",
+      mobileNoticeTitle: "Browsing on a Phone Right Now? Open This Page on Your PC First",
+      mobileNoticeBody: "Because a Windows or Linux computer is mandatory to run Tibyan Hub and the phone app is strictly a companion, copy the link below and open it on your computer:",
+      copyBtn: "Copy Link for My PC",
+      copiedBtn: "✓ Link Copied! Open It on Your PC"
+    },
     qrBanner: {
-      title: "Watching from the Auditorium? Scan to Open the Live Site & Downloads",
-      sub: "Scan with your phone camera to explore this interactive showcase or download the Android & Desktop apps."
+      title: "Watching from the Auditorium? Scan to Save the Official Website Link",
+      sub: "Explore the live curriculum & sandbox on your phone now, then open the same link on your Windows or Linux PC to install the required desktop app."
     }
   }
 };
